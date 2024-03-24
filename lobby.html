@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Peer Chat</title>
+    <link rel="stylesheet" href="lobby.css" />
+  </head>
+  <body>
+    <main id="lobby-container">
+      <div id="lobby__header">
+        <div id="lobby__header_left">
+          <img src="/images/logo.png" />
+          <h4>Peer to Peer Chat</h4>
+        </div>
+      </div>
+
+      <div id="form-container">
+        <div class="form-container-left">
+          <div id="form__container__header">
+            <h6>P2P Video Streaming</h6>
+            <p>
+              P2P is a highest quality1, free, simple video calling app.This
+              cross-platform programs will help you easily connect with
+              co-workers, family, and friends.
+            </p>
+          </div>
+
+          <div id="form__content__wrapper">
+            <form id="join-form">
+              <input
+                id="input"
+                type="text"
+                name="invite_link"
+                required
+                placeholder="Create or Enter Code to Join a Room"
+              />
+              <input id="submit" type="submit" value="Join" />
+            </form>
+          </div>
+        </div>
+        <div class="form-container-right">
+          <img src="/images/landing.jpg" />
+        </div>
+      </div>
+    </main>
+  </body>
+
+  <script>
+    let form = document.getElementById("join-form");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      let inviteCode = e.target.invite_link.value;
+
+      window.location = `index.html?room=${inviteCode}`;
+    });
+  </script>
+</html>
