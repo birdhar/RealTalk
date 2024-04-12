@@ -15,24 +15,20 @@
   background-color: black;
   width: 100%;
   height: 100%;
+
   object-fit: cover;
 }
 
 #user-2 {
   display: none;
-}
 
-.smallFrame {
-  position: fixed;
+  position: absolute;
   top: 20px;
   left: 20px;
   height: 170px;
   width: 300px;
   border-radius: 5px;
   border: 2px solid #b366f9;
-  -webkit-box-shadow: 3px 3px 15px -1px rgba(0, 0, 0, 0.77);
-  box-shadow: 3px 3px 15px -1px rgba(0, 0, 0, 0.77);
-  z-index: 999;
 }
 
 #controls {
@@ -63,6 +59,53 @@
   background-color: rgb(255, 80, 80, 1);
 }
 
+.loader_container {
+  height: 100vh;
+  display: grid;
+  place-items: center;
+}
+
+.spinner {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top-color: #333;
+  animation: spin 1s infinite linear;
+}
+
+.spinner::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 30px;
+  height: 30px;
+  border: 4px solid transparent;
+  border-top-color: #555;
+  border-radius: 50%;
+  animation: spin 1.2s infinite linear;
+}
+
+.spinner::after {
+  content: "";
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  width: 30px;
+  height: 30px;
+  border: 4px solid transparent;
+  border-bottom-color: #f06060;
+  border-radius: 50%;
+  animation: spin 1.2s infinite linear;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
 @media screen and (max-width: 600px) {
   .smallFrame {
     height: 80px;

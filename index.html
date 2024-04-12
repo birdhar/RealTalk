@@ -8,9 +8,16 @@
     <link rel="stylesheet" type="text/css" href="main.css" />
   </head>
   <body>
-    <div id="videos">
+    <div id="videos" class="dropzone">
       <video class="video-player" id="user-1" autoplay playsinline></video>
-      <video class="video-player" id="user-2" autoplay playsinline></video>
+
+      <video
+        class="video-player draggable"
+        id="user-2"
+        autoplay
+        playsinline
+        draggable="true"
+      ></video>
     </div>
 
     <div id="controls">
@@ -25,6 +32,10 @@
           <img src="/icons/phone.png" alt="" />
         </div>
       </a>
+    </div>
+
+    <div class="loader_container">
+      <div class="spinner"></div>
     </div>
   </body>
   <script type="text/javascript" src="agora-rtm-sdk-1.4.4.js"></script>

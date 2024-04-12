@@ -1,3 +1,5 @@
+document.getElementById("videos").style.display = "none";
+document.getElementById("controls").style.display = "none";
 let APP_ID = "56efd676cac14a3c810dad195be263ae";
 let token = null;
 
@@ -11,9 +13,18 @@ let urlParams = new URLSearchParams(queryString);
 
 let roomId = urlParams.get("room");
 
-if (!roomId) {
-  window.location = "lobby.html";
-}
+const checkRoomId = () => {
+  if (!roomId) {
+    window.location = "lobby.html";
+  } else {
+    document.getElementById("videos").style.display = "grid";
+    document.getElementById("controls").style.display = "flex";
+    document.querySelector(".loader_container").style.display = "none";
+  }
+};
+setTimeout(() => {
+  checkRoomId();
+}, 2000);
 
 let localStream;
 let remoteStream;
@@ -27,7 +38,6 @@ const servers = {
   ],
 };
 
-console.log("hi");
 let constraints = {
   video: {
     width: { min: 640, ideal: 1920, max: 1920 },
@@ -45,7 +55,6 @@ let init = async () => {
 
   channel.on("MemberJoined", handleUserJoined);
   channel.on("MemberLeft", handleUserLeft);
-
   client.on("MessageFromPeer", handleMessageFromPeer);
 
   localStream = await navigator.mediaDevices.getUserMedia(constraints);
@@ -190,5 +199,29 @@ document.getElementById("camera-btn").addEventListener("click", toggleCamera);
 document.getElementById("mic-btn").addEventListener("click", toggleMic);
 
 window.addEventListener("beforeunload", leaveChannel);
+
+const draggableItem = document.querySelector(".draggable");
+const dropzone = document.querySelector(".dropzone");
+
+draggableItem.addEventListener("dragstart", (e) => {
+  e.dataTransfer.setData("text/plain", e.target.id);
+});
+
+dropzone.addEventListener("dragover", function (e) {
+  e.preventDefault();
+});
+dropzone.addEventListener("drop", function (e) {
+  e.preventDefault();
+
+  // Get the ID of the dragged element from the data transfer item
+  const id = e.dataTransfer.getData("text/plain");
+
+  // Get the dragged element using the ID
+  const draggedElement = document.getElementById(id);
+  draggedElement.style.left = e.clientX + "px";
+  draggedElement.style.top = e.clientY + "px";
+
+  dropzone.appendChild(draggedElement);
+});
 
 init();
